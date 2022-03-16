@@ -26,16 +26,33 @@ $coloresVerdesDegradados: (
     degradado8: #5DA49D,
 
     degradado9: #C4E9C9,
-    degradado10: #82C7A1,
-
+    degradado10: #82C7A1
 );
+
+// colores
+$siguiente: 0;
 @for $i from 1 through 5{
     .circulo#{$i}{
         height: 200px;
         width: 100%;
         border-radius: 50%;
         background: linear-gradient(to right, 
-        map-get($coloresVerdesDegradados, degradado#{$i}), 
-        map-get($coloresVerdesDegradados, degradado#{$i+1}) );
+        map-get($coloresVerdesDegradados, degradado#{$i + $siguiente}), 
+        map-get($coloresVerdesDegradados, degradado#{$i+1 + $siguiente}) );
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    // contador para saltar de dos a dos posiciones de colores
+    $siguiente: $siguiente + 1;
+}
+
+// rectangulo
+@each $color in map-keys($coloresVerdesPlanos) {
+    $contador: $contador + 1;
+    .rectangulo#{$contador}{
+        height: 100%;
+        width: 100%;
+        border-radius: 50vh;
+        background: map-get($coloresVerdesPlanos, $color);
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 }
